@@ -38,7 +38,7 @@ const PublicRoute = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/cacfes">
         <Routes>
           <Route
             path="/login"
