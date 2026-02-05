@@ -1,0 +1,30 @@
+.footer {
+  height: var(--footer-height);
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-gray-light);
+  position: fixed;
+  bottom: 0;
+  left: var(--sidebar-width);
+  right: 0;
+}
+
+.footer-content {
+  height: 100%;
+  padding: 0 var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    left: 0;
+  }
+}

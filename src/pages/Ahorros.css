@@ -1,0 +1,32 @@
+.ahorros-page {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.ahorros-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.action-btn.deposit {
+  color: var(--color-success);
+}
+
+.action-btn.deposit:hover {
+  background-color: rgba(67, 160, 71, 0.1);
+}
+
+.action-btn.withdraw {
+  color: var(--color-warning);
+}
+
+.action-btn.withdraw:hover {
+  background-color: rgba(255, 160, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .ahorros-stats {
+    grid-template-columns: 1fr;
+  }
+}

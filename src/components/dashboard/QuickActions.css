@@ -1,0 +1,17 @@
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.quick-action-btn {
+  width: 100%;
+  justify-content: flex-start;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+}
