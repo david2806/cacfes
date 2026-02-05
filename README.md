@@ -2,6 +2,12 @@
 
 Sistema web moderno y profesional para la Cooperativa de Ahorro y Crédito **CACFES**, desarrollado con React y Vite.
 
+## 🌐 Acceso al Sistema
+
+**Sitio en producción**: [https://david2806.github.io/cacfes](https://david2806.github.io/cacfes)
+
+El sitio se despliega automáticamente en GitHub Pages cada vez que se hace push a la rama `main`.
+
 ## 🎨 Características
 
 - **Diseño Profesional**: Interfaz moderna con paleta de colores institucionales (verde y azul)
@@ -95,6 +101,27 @@ npm run lint
 # Construir para producción
 npm run build
 ```
+
+## 🚀 Despliegue
+
+El proyecto se despliega automáticamente en GitHub Pages mediante GitHub Actions:
+
+1. **Despliegue Automático**: Cada push a la rama `main` dispara automáticamente el workflow de deploy
+2. **GitHub Actions**: El workflow construye el proyecto y lo despliega en GitHub Pages
+3. **URL del Sitio**: Una vez desplegado, el sitio estará disponible en [https://david2806.github.io/cacfes](https://david2806.github.io/cacfes)
+
+### Configuración Inicial de GitHub Pages
+
+Para habilitar GitHub Pages en el repositorio (solo se hace una vez):
+
+1. Ve a **Settings** > **Pages** en el repositorio de GitHub
+2. En **Source**, selecciona **GitHub Actions**
+3. El sitio estará listo después del primer despliegue exitoso
+
+### Verificar Estado del Despliegue
+
+- Ve a la pestaña **Actions** del repositorio para ver el estado de los workflows
+- Cada despliegue exitoso actualizará automáticamente el sitio en producción
 
 ## 📄 Licencia
 
