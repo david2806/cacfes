@@ -1,0 +1,111 @@
+.stat-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-medium);
+  border-left: 4px solid;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.stat-card-green {
+  border-left-color: var(--color-primary-green);
+}
+
+.stat-card-blue {
+  border-left-color: var(--color-primary-blue);
+}
+
+.stat-card-orange {
+  border-left-color: var(--color-warning);
+}
+
+.stat-card-red {
+  border-left-color: var(--color-error);
+}
+
+.stat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.stat-card-info {
+  flex: 1;
+}
+
+.stat-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-medium);
+  margin: 0 0 var(--spacing-sm) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card-value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+}
+
+.stat-card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-2xl);
+  background: linear-gradient(135deg, var(--color-primary-green), var(--color-primary-blue));
+  color: var(--color-white);
+}
+
+.stat-card-blue .stat-card-icon {
+  background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-blue-light));
+}
+
+.stat-card-orange .stat-card-icon {
+  background: linear-gradient(135deg, var(--color-warning), #FFB74D);
+}
+
+.stat-card-red .stat-card-icon {
+  background: linear-gradient(135deg, var(--color-error), #EF5350);
+}
+
+.stat-card-trend {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-gray-light);
+}
+
+.trend {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.trend.up {
+  color: var(--color-success);
+}
+
+.trend.down {
+  color: var(--color-error);
+}
+
+.trend-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+}
