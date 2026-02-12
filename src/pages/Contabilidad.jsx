@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FiPlus, FiTrendingUp, FiTrendingDown, FiDollarSign, FiFileText } from 'react-icons/fi';
+import { FiPlus, FiTrendingUp, FiTrendingDown, FiDollarSign, FiFileText, FiBook, FiBarChart2 } from 'react-icons/fi';
+import StatCard from '../components/dashboard/StatCard';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Table from '../components/common/Table';
@@ -41,10 +42,52 @@ const Contabilidad = () => {
     },
   ];
 
-  const ingresosMes = 7100;
-  const egresosMes = 370;
-  const balance = ingresosMes - egresosMes;
-  const cuentasPorCobrar = 45600;
+  const ingresosMes = 125450;
+  const egresosMes = 89200;
+  const balance = 3450000;
+  const cuentasPorCobrar = 245000;
+
+  const stats = [
+    {
+      title: 'Ingresos del Mes',
+      value: `$${ingresosMes.toLocaleString()}`,
+      subtitle: 'Ingresos totales',
+      icon: <FiTrendingUp />,
+      color: 'green',
+      trend: { type: 'up', value: '12%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Egresos del Mes',
+      value: `$${egresosMes.toLocaleString()}`,
+      subtitle: 'Gastos operativos',
+      icon: <FiTrendingDown />,
+      color: 'red',
+      trend: { type: 'down', value: '5%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Balance General',
+      value: `$${balance.toLocaleString()}`,
+      subtitle: 'Patrimonio total',
+      icon: <FiDollarSign />,
+      color: 'blue',
+      trend: { type: 'up', value: '8%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Cuentas por Cobrar',
+      value: `$${cuentasPorCobrar.toLocaleString()}`,
+      subtitle: 'Pendientes de cobro',
+      icon: <FiFileText />,
+      color: 'orange',
+      trend: { type: 'down', value: '3%', label: 'vs. mes anterior' }
+    }
+  ];
+
+  const quickActions = [
+    { id: 'nuevo-asiento', label: 'Nuevo Asiento', icon: <FiPlus />, variant: 'primary' },
+    { id: 'plan-cuentas', label: 'Plan de Cuentas', icon: <FiBook />, variant: 'outline' },
+    { id: 'balance', label: 'Balance General', icon: <FiDollarSign />, variant: 'outline' },
+    { id: 'estado-resultados', label: 'Estado de Resultados', icon: <FiBarChart2 />, variant: 'outline' }
+  ];
 
   return (
     <div className="contabilidad-page">
@@ -58,92 +101,92 @@ const Contabilidad = () => {
         </Button>
       </div>
 
-      <div className="contabilidad-stats">
-        <div className="stat-card">
-          <div className="stat-icon success">
-            <FiTrendingUp />
-          </div>
-          <div className="stat-content">
-            <div className="stat-label">Ingresos del Mes</div>
-            <div className="stat-value">${ingresosMes.toLocaleString()}</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon error">
-            <FiTrendingDown />
-          </div>
-          <div className="stat-content">
-            <div className="stat-label">Egresos del Mes</div>
-            <div className="stat-value">${egresosMes.toLocaleString()}</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon info">
-            <FiDollarSign />
-          </div>
-          <div className="stat-content">
-            <div className="stat-label">Balance</div>
-            <div className="stat-value">${balance.toLocaleString()}</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon warning">
-            <FiFileText />
-          </div>
-          <div className="stat-content">
-            <div className="stat-label">Cuentas por Cobrar</div>
-            <div className="stat-value">${cuentasPorCobrar.toLocaleString()}</div>
-          </div>
-        </div>
+      <div className="stats-grid">
+        {stats.map((stat, index) => (
+          <StatCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            subtitle={stat.subtitle}
+            icon={stat.icon}
+            color={stat.color}
+            trend={stat.trend}
+          />
+        ))}
       </div>
 
-      <div className="contabilidad-tabs">
-        <button 
-          className={`tab ${activeTab === 'asientos' ? 'active' : ''}`}
-          onClick={() => setActiveTab('asientos')}
-        >
-          Asientos Contables
-        </button>
-        <button 
-          className={`tab ${activeTab === 'plan' ? 'active' : ''}`}
-          onClick={() => setActiveTab('plan')}
-        >
-          Plan de Cuentas
-        </button>
-        <button 
-          className={`tab ${activeTab === 'balance' ? 'active' : ''}`}
-          onClick={() => setActiveTab('balance')}
-        >
-          Balance General
-        </button>
-      </div>
+      <div className="dashboard-content">
+        <div className="dashboard-main">
+          <div className="contabilidad-tabs">
+            <button 
+              className={`tab ${activeTab === 'asientos' ? 'active' : ''}`}
+              onClick={() => setActiveTab('asientos')}
+            >
+              Asientos Contables
+            </button>
+            <button 
+              className={`tab ${activeTab === 'plan' ? 'active' : ''}`}
+              onClick={() => setActiveTab('plan')}
+            >
+              Plan de Cuentas
+            </button>
+            <button 
+              className={`tab ${activeTab === 'balance' ? 'active' : ''}`}
+              onClick={() => setActiveTab('balance')}
+            >
+              Balance General
+            </button>
+          </div>
 
-      <Card>
-        {activeTab === 'asientos' && (
-          <>
+          <Card>
+            {activeTab === 'asientos' && (
+              <>
+                <div className="card-header">
+                  <h3>Asientos Contables Recientes</h3>
+                </div>
+                <Table columns={columns} data={asientosContables} />
+              </>
+            )}
+            
+            {activeTab === 'plan' && (
+              <div className="placeholder-content">
+                <FiFileText size={48} />
+                <h3>Plan de Cuentas</h3>
+                <p>Configuración del plan de cuentas contable de la cooperativa</p>
+              </div>
+            )}
+            
+            {activeTab === 'balance' && (
+              <div className="placeholder-content">
+                <FiDollarSign size={48} />
+                <h3>Balance General</h3>
+                <p>Estado de situación financiera de la cooperativa</p>
+              </div>
+            )}
+          </Card>
+        </div>
+
+        <div className="dashboard-sidebar">
+          <Card>
             <div className="card-header">
-              <h3>Asientos Contables Recientes</h3>
+              <h3>Acciones Rápidas</h3>
             </div>
-            <Table columns={columns} data={asientosContables} />
-          </>
-        )}
-        
-        {activeTab === 'plan' && (
-          <div className="placeholder-content">
-            <FiFileText size={48} />
-            <h3>Plan de Cuentas</h3>
-            <p>Configuración del plan de cuentas contable de la cooperativa</p>
-          </div>
-        )}
-        
-        {activeTab === 'balance' && (
-          <div className="placeholder-content">
-            <FiDollarSign size={48} />
-            <h3>Balance General</h3>
-            <p>Estado de situación financiera de la cooperativa</p>
-          </div>
-        )}
-      </Card>
+            <div className="quick-actions-list">
+              {quickActions.map((action) => (
+                <Button
+                  key={action.id}
+                  variant={action.variant}
+                  icon={action.icon}
+                  onClick={() => console.log('Action:', action.id)}
+                  className="quick-action-btn"
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };

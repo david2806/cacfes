@@ -13,7 +13,6 @@ const Sidebar = () => {
     { path: '/parametrizacion', icon: <FiSliders />, label: 'Parametrización Financiera' },
     { path: '/notificaciones', icon: <FiBell />, label: 'Notificaciones' },
     { path: '/soporte', icon: <FiHelpCircle />, label: 'Soporte' },
-    { path: '/configuracion', icon: <FiSettings />, label: 'Configuración' },
   ];
 
   return (
@@ -38,6 +37,17 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
+      <div className="sidebar-footer">
+        <NavLink
+          to="/configuracion"
+          className={({ isActive }) =>
+            `sidebar-nav-item ${isActive ? 'active' : ''}`
+          }
+        >
+          <span className="nav-icon"><FiSettings /></span>
+          <span className="nav-label">Configuración</span>
+        </NavLink>
+      </div>
     </aside>
   );
 };
