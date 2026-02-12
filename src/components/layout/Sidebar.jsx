@@ -1,15 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FiHome, FiUsers, FiDollarSign, FiPieChart, FiFileText, FiSettings } from 'react-icons/fi';
+import { FiHome, FiUsers, FiDollarSign, FiBook, FiFileText, FiSliders, FiBell, FiHelpCircle, FiSettings } from 'react-icons/fi';
 import './Sidebar.css';
 
 const Sidebar = () => {
   const menuItems = [
     { path: '/dashboard', icon: <FiHome />, label: 'Dashboard' },
-    { path: '/socios', icon: <FiUsers />, label: 'Socios' },
-    { path: '/prestamos', icon: <FiDollarSign />, label: 'Préstamos' },
-    { path: '/ahorros', icon: <FiPieChart />, label: 'Ahorros' },
+    { path: '/cuentas', icon: <FiUsers />, label: 'Cuenta' },
+    { path: '/creditos', icon: <FiDollarSign />, label: 'Créditos' },
+    { path: '/contabilidad', icon: <FiBook />, label: 'Contabilidad' },
     { path: '/reportes', icon: <FiFileText />, label: 'Reportes' },
+    { path: '/parametrizacion', icon: <FiSliders />, label: 'Parametrización Financiera' },
+    { path: '/notificaciones', icon: <FiBell />, label: 'Notificaciones' },
+    { path: '/soporte', icon: <FiHelpCircle />, label: 'Soporte' },
+    { path: '/configuracion', icon: <FiSettings />, label: 'Configuración' },
   ];
 
   return (
@@ -34,12 +38,6 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
-      <div className="sidebar-footer">
-        <NavLink to="/settings" className="sidebar-nav-item">
-          <span className="nav-icon"><FiSettings /></span>
-          <span className="nav-label">Configuración</span>
-        </NavLink>
-      </div>
     </aside>
   );
 };
