@@ -1,0 +1,60 @@
+.creditos-page {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.creditos-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.stat-box {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: transform var(--transition-fast);
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-dark);
+}
+
+.stat-value.success {
+  color: var(--color-success);
+}
+
+.stat-value.error {
+  color: var(--color-error);
+}
+
+.action-btn.view {
+  color: var(--color-primary-green);
+}
+
+.action-btn.view:hover {
+  background-color: rgba(46, 125, 50, 0.1);
+}
+
+@media (max-width: 768px) {
+  .creditos-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
