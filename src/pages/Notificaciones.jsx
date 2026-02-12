@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FiBell, FiCheck, FiTrash2, FiAlertCircle, FiInfo, FiCheckCircle } from 'react-icons/fi';
+import { FiBell, FiCheck, FiTrash2, FiAlertCircle, FiInfo, FiCheckCircle, FiSettings, FiRefreshCw } from 'react-icons/fi';
+import StatCard from '../components/dashboard/StatCard';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import './Notificaciones.css';
@@ -74,6 +75,52 @@ const Notificaciones = () => {
     console.log('Eliminar notificación:', id);
   };
 
+  const totalNotificaciones = notificaciones.length;
+  const alertasCriticas = notificaciones.filter(n => n.tipo === 'alerta' && !n.leida).length;
+  const notificacionesHoy = notificaciones.filter(n => n.fecha.includes('05 Feb')).length;
+
+  const stats = [
+    {
+      title: 'Total Notificaciones',
+      value: totalNotificaciones.toString(),
+      subtitle: 'Todas las notificaciones',
+      icon: <FiBell />,
+      color: 'blue',
+      trend: { type: 'up', value: '12', label: 'vs. semana anterior' }
+    },
+    {
+      title: 'No Leídas',
+      value: noLeidas.toString(),
+      subtitle: 'Pendientes de revisión',
+      icon: <FiInfo />,
+      color: 'orange',
+      trend: { type: 'up', value: '3', label: 'vs. ayer' }
+    },
+    {
+      title: 'Alertas Críticas',
+      value: alertasCriticas.toString(),
+      subtitle: 'Requieren atención',
+      icon: <FiAlertCircle />,
+      color: 'red',
+      trend: { type: 'down', value: '1', label: 'vs. ayer' }
+    },
+    {
+      title: 'Notificaciones Hoy',
+      value: notificacionesHoy.toString(),
+      subtitle: 'Recibidas hoy',
+      icon: <FiCheckCircle />,
+      color: 'green',
+      trend: { type: 'up', value: '5', label: 'vs. ayer' }
+    }
+  ];
+
+  const quickActions = [
+    { id: 'marcar-leidas', label: 'Marcar todas como leídas', icon: <FiCheck />, variant: 'primary' },
+    { id: 'config-alertas', label: 'Configurar alertas', icon: <FiSettings />, variant: 'outline' },
+    { id: 'limpiar', label: 'Limpiar notificaciones', icon: <FiTrash2 />, variant: 'outline' },
+    { id: 'actualizar', label: 'Actualizar', icon: <FiRefreshCw />, variant: 'outline' }
+  ];
+
   return (
     <div className="notificaciones-page">
       <div className="page-header">
@@ -87,72 +134,111 @@ const Notificaciones = () => {
         </div>
       </div>
 
-      <div className="notification-filters">
-        <button 
-          className={`filter-btn ${filter === 'todas' ? 'active' : ''}`}
-          onClick={() => setFilter('todas')}
-        >
-          Todas ({notificaciones.length})
-        </button>
-        <button 
-          className={`filter-btn ${filter === 'no_leidas' ? 'active' : ''}`}
-          onClick={() => setFilter('no_leidas')}
-        >
-          No leídas ({noLeidas})
-        </button>
-        <button 
-          className={`filter-btn ${filter === 'leidas' ? 'active' : ''}`}
-          onClick={() => setFilter('leidas')}
-        >
-          Leídas ({notificaciones.length - noLeidas})
-        </button>
+      <div className="stats-grid">
+        {stats.map((stat, index) => (
+          <StatCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            subtitle={stat.subtitle}
+            icon={stat.icon}
+            color={stat.color}
+            trend={stat.trend}
+          />
+        ))}
       </div>
 
-      <Card>
-        <div className="notifications-list">
-          {filteredNotificaciones.map((notif) => (
-            <div 
-              key={notif.id} 
-              className={`notification-item ${!notif.leida ? 'unread' : ''}`}
+      <div className="dashboard-content">
+        <div className="dashboard-main">
+          <div className="notification-filters">
+            <button 
+              className={`filter-btn ${filter === 'todas' ? 'active' : ''}`}
+              onClick={() => setFilter('todas')}
             >
-              <div className={`notification-icon ${notif.tipo}`}>
-                {getIconByTipo(notif.tipo)}
-              </div>
-              <div className="notification-content">
-                <h4>{notif.titulo}</h4>
-                <p>{notif.mensaje}</p>
-                <span className="notification-time">{notif.fecha}</span>
-              </div>
-              <div className="notification-actions">
-                {!notif.leida && (
-                  <button 
-                    className="action-btn check" 
-                    title="Marcar como leída"
-                    onClick={() => handleMarkAsRead(notif.id)}
-                  >
-                    <FiCheck />
-                  </button>
-                )}
-                <button 
-                  className="action-btn delete" 
-                  title="Eliminar"
-                  onClick={() => handleDelete(notif.id)}
+              Todas ({notificaciones.length})
+            </button>
+            <button 
+              className={`filter-btn ${filter === 'no_leidas' ? 'active' : ''}`}
+              onClick={() => setFilter('no_leidas')}
+            >
+              No leídas ({noLeidas})
+            </button>
+            <button 
+              className={`filter-btn ${filter === 'leidas' ? 'active' : ''}`}
+              onClick={() => setFilter('leidas')}
+            >
+              Leídas ({notificaciones.length - noLeidas})
+            </button>
+          </div>
+
+          <Card>
+            <div className="notifications-list">
+              {filteredNotificaciones.map((notif) => (
+                <div 
+                  key={notif.id} 
+                  className={`notification-item ${!notif.leida ? 'unread' : ''}`}
                 >
-                  <FiTrash2 />
-                </button>
-              </div>
+                  <div className={`notification-icon ${notif.tipo}`}>
+                    {getIconByTipo(notif.tipo)}
+                  </div>
+                  <div className="notification-content">
+                    <h4>{notif.titulo}</h4>
+                    <p>{notif.mensaje}</p>
+                    <span className="notification-time">{notif.fecha}</span>
+                  </div>
+                  <div className="notification-actions">
+                    {!notif.leida && (
+                      <button 
+                        className="action-btn check" 
+                        title="Marcar como leída"
+                        onClick={() => handleMarkAsRead(notif.id)}
+                      >
+                        <FiCheck />
+                      </button>
+                    )}
+                    <button 
+                      className="action-btn delete" 
+                      title="Eliminar"
+                      onClick={() => handleDelete(notif.id)}
+                    >
+                      <FiTrash2 />
+                    </button>
+                  </div>
+                </div>
+              ))}
+              
+              {filteredNotificaciones.length === 0 && (
+                <div className="empty-state">
+                  <FiBell size={64} />
+                  <h3>No hay notificaciones</h3>
+                  <p>No tienes notificaciones en esta categoría</p>
+                </div>
+              )}
             </div>
-          ))}
-          
-          {filteredNotificaciones.length === 0 && (
-            <div className="empty-state">
-              <FiBell size={64} />
-              <h3>No hay notificaciones</h3>
-              <p>No tienes notificaciones en esta categoría</p>
-            </div>
-          )}
+          </Card>
         </div>
-      </Card>
+
+        <div className="dashboard-sidebar">
+          <Card>
+            <div className="card-header">
+              <h3>Acciones Rápidas</h3>
+            </div>
+            <div className="quick-actions-list">
+              {quickActions.map((action) => (
+                <Button
+                  key={action.id}
+                  variant={action.variant}
+                  icon={action.icon}
+                  onClick={() => console.log('Action:', action.id)}
+                  className="quick-action-btn"
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };

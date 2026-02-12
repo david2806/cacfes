@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { FiPercent, FiClock, FiDollarSign, FiAlertCircle, FiSave } from 'react-icons/fi';
+import { FiPercent, FiClock, FiDollarSign, FiAlertCircle, FiSave, FiCheckCircle, FiSliders } from 'react-icons/fi';
+import StatCard from '../components/dashboard/StatCard';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
+import Table from '../components/common/Table';
 import './ParametrizacionFinanciera.css';
 
 const ParametrizacionFinanciera = () => {
@@ -43,6 +45,70 @@ const ParametrizacionFinanciera = () => {
     alert('Parámetros guardados exitosamente');
   };
 
+  const stats = [
+    {
+      title: 'Tasa Promedio Activa',
+      value: '12.5%',
+      subtitle: 'Tasa de crédito',
+      icon: <FiPercent />,
+      color: 'green',
+      trend: { type: 'down', value: '0.5%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Plazo Promedio',
+      value: '24 meses',
+      subtitle: 'Plazo estándar',
+      icon: <FiClock />,
+      color: 'blue',
+      trend: { type: 'up', value: '2 meses', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Mora Promedio',
+      value: '3.2%',
+      subtitle: 'Índice de mora',
+      icon: <FiAlertCircle />,
+      color: 'orange',
+      trend: { type: 'down', value: '1.1%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Parámetros Configurados',
+      value: '18',
+      subtitle: 'Parámetros activos',
+      icon: <FiCheckCircle />,
+      color: 'green',
+      trend: { type: 'up', value: '3', label: 'vs. mes anterior' }
+    }
+  ];
+
+  const parametrosRecientes = [
+    { id: 1, parametro: 'Tasa Crédito Ordinario', valorActual: '12.5%', ultimoCambio: '15 Ene 2024', estado: 'Activo' },
+    { id: 2, parametro: 'Plazo Máximo', valorActual: '60 meses', ultimoCambio: '10 Ene 2024', estado: 'Activo' },
+    { id: 3, parametro: 'Monto Mínimo Crédito', valorActual: '$1,000', ultimoCambio: '05 Ene 2024', estado: 'Activo' },
+    { id: 4, parametro: 'Interés por Mora', valorActual: '2.0%', ultimoCambio: '01 Ene 2024', estado: 'Activo' },
+  ];
+
+  const columns = [
+    { header: 'Parámetro', accessor: 'parametro' },
+    { header: 'Valor Actual', accessor: 'valorActual' },
+    { header: 'Último Cambio', accessor: 'ultimoCambio' },
+    { 
+      header: 'Estado', 
+      accessor: 'estado',
+      render: (value) => (
+        <span className={`badge ${value === 'Activo' ? 'badge-success' : 'badge-error'}`}>
+          {value}
+        </span>
+      )
+    },
+  ];
+
+  const quickActions = [
+    { id: 'tasas', label: 'Tasas de Interés', icon: <FiPercent />, variant: 'primary' },
+    { id: 'plazos', label: 'Plazos', icon: <FiClock />, variant: 'outline' },
+    { id: 'montos', label: 'Montos', icon: <FiDollarSign />, variant: 'outline' },
+    { id: 'mora', label: 'Políticas de Mora', icon: <FiAlertCircle />, variant: 'outline' }
+  ];
+
   return (
     <div className="parametrizacion-page">
       <div className="page-header">
@@ -55,7 +121,30 @@ const ParametrizacionFinanciera = () => {
         </Button>
       </div>
 
-      <div className="parametrizacion-grid">
+      <div className="stats-grid">
+        {stats.map((stat, index) => (
+          <StatCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            subtitle={stat.subtitle}
+            icon={stat.icon}
+            color={stat.color}
+            trend={stat.trend}
+          />
+        ))}
+      </div>
+
+      <div className="dashboard-content">
+        <div className="dashboard-main">
+          <Card>
+            <div className="card-header">
+              <h3>Parámetros Recientes Configurados</h3>
+            </div>
+            <Table columns={columns} data={parametrosRecientes} />
+          </Card>
+
+          <div className="parametrizacion-grid">
         <Card>
           <div className="card-header">
             <div className="card-header-icon success">
@@ -200,10 +289,33 @@ const ParametrizacionFinanciera = () => {
                 <strong>Política de mora:</strong> Se aplicará un interés adicional del {tasas.mora}% 
                 después de 5 días de retraso en el pago de cuotas.
               </div>
+              </div>
             </div>
+          </Card>
+        </div>
+      </div>
+
+      <div className="dashboard-sidebar">
+        <Card>
+          <div className="card-header">
+            <h3>Acciones Rápidas</h3>
+          </div>
+          <div className="quick-actions-list">
+            {quickActions.map((action) => (
+              <Button
+                key={action.id}
+                variant={action.variant}
+                icon={action.icon}
+                onClick={() => console.log('Action:', action.id)}
+                className="quick-action-btn"
+              >
+                {action.label}
+              </Button>
+            ))}
           </div>
         </Card>
       </div>
+    </div>
     </div>
   );
 };
