@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FiPlus, FiSearch, FiEye } from 'react-icons/fi';
+import { FiPlus, FiSearch, FiEye, FiDollarSign, FiTrendingUp, FiAlertCircle, FiPercent } from 'react-icons/fi';
+import StatCard from '../components/dashboard/StatCard';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
@@ -64,6 +65,41 @@ const Creditos = () => {
   const totalMora = creditos.filter(p => p.estado === 'Mora').length;
   const montoTotal = creditos.reduce((sum, p) => sum + p.monto, 0);
 
+  const stats = [
+    {
+      title: 'Créditos Activos',
+      value: totalActivos.toString(),
+      subtitle: `De ${creditos.length} totales`,
+      icon: <FiDollarSign />,
+      color: 'green',
+      trend: { type: 'up', value: '8%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Monto Total Desembolsado',
+      value: `$${montoTotal.toLocaleString()}`,
+      subtitle: 'Capital activo',
+      icon: <FiTrendingUp />,
+      color: 'blue',
+      trend: { type: 'up', value: '15%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Créditos en Mora',
+      value: totalMora.toString(),
+      subtitle: 'Requieren seguimiento',
+      icon: <FiAlertCircle />,
+      color: 'red',
+      trend: { type: 'down', value: '3%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Tasa de Recuperación',
+      value: '96%',
+      subtitle: 'Pagos al día',
+      icon: <FiPercent />,
+      color: 'green',
+      trend: { type: 'up', value: '2%', label: 'vs. mes anterior' }
+    }
+  ];
+
   return (
     <div className="creditos-page">
       <div className="page-header">
@@ -76,23 +112,18 @@ const Creditos = () => {
         </Button>
       </div>
 
-      <div className="creditos-stats">
-        <div className="stat-box">
-          <div className="stat-label">Total Créditos</div>
-          <div className="stat-value">{creditos.length}</div>
-        </div>
-        <div className="stat-box">
-          <div className="stat-label">Activos</div>
-          <div className="stat-value success">{totalActivos}</div>
-        </div>
-        <div className="stat-box">
-          <div className="stat-label">En Mora</div>
-          <div className="stat-value error">{totalMora}</div>
-        </div>
-        <div className="stat-box">
-          <div className="stat-label">Monto Total</div>
-          <div className="stat-value">${montoTotal.toLocaleString()}</div>
-        </div>
+      <div className="stats-grid">
+        {stats.map((stat, index) => (
+          <StatCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            subtitle={stat.subtitle}
+            icon={stat.icon}
+            color={stat.color}
+            trend={stat.trend}
+          />
+        ))}
       </div>
 
       <Card>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FiPlus, FiEdit, FiTrash2, FiSearch } from 'react-icons/fi';
+import { FiPlus, FiEdit, FiTrash2, FiSearch, FiUsers, FiUserPlus, FiUserX, FiTrendingUp } from 'react-icons/fi';
+import StatCard from '../components/dashboard/StatCard';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
@@ -81,6 +82,44 @@ const Cuentas = () => {
     socio.cedula.includes(searchTerm)
   );
 
+  const sociosActivos = socios.filter(s => s.estado === 'Activo').length;
+  const sociosInactivos = socios.filter(s => s.estado === 'Inactivo').length;
+
+  const stats = [
+    {
+      title: 'Total de Socios Activos',
+      value: sociosActivos.toString(),
+      subtitle: 'Socios registrados',
+      icon: <FiUsers />,
+      color: 'green',
+      trend: { type: 'up', value: '12%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Socios Nuevos este Mes',
+      value: '8',
+      subtitle: 'Nuevos registros',
+      icon: <FiUserPlus />,
+      color: 'blue',
+      trend: { type: 'up', value: '25%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Socios Inactivos',
+      value: sociosInactivos.toString(),
+      subtitle: 'Requieren atención',
+      icon: <FiUserX />,
+      color: 'orange',
+      trend: { type: 'down', value: '5%', label: 'vs. mes anterior' }
+    },
+    {
+      title: 'Tasa de Retención',
+      value: '94%',
+      subtitle: 'Últimos 12 meses',
+      icon: <FiTrendingUp />,
+      color: 'green',
+      trend: { type: 'up', value: '3%', label: 'vs. mes anterior' }
+    }
+  ];
+
   return (
     <div className="cuentas-page">
       <div className="page-header">
@@ -91,6 +130,20 @@ const Cuentas = () => {
         <Button variant="primary" icon={<FiPlus />} onClick={() => setShowModal(true)}>
           Nuevo Socio
         </Button>
+      </div>
+
+      <div className="stats-grid">
+        {stats.map((stat, index) => (
+          <StatCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            subtitle={stat.subtitle}
+            icon={stat.icon}
+            color={stat.color}
+            trend={stat.trend}
+          />
+        ))}
       </div>
 
       <Card>
