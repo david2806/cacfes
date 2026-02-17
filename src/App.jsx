@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuthContext } from './context/AuthContext';
 import Layout from './components/layout/Layout';
 import Login from './pages/Login';
@@ -42,7 +42,7 @@ const PublicRoute = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
-      <Router basename="/cacfes">
+      <HashRouter>
         <Routes>
           <Route
             path="/login"
@@ -73,7 +73,7 @@ function App() {
           </Route>
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
-      </Router>
+      </HashRouter>
     </AuthProvider>
   );
 }
