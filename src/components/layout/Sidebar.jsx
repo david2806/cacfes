@@ -1,9 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { FiHome, FiUsers, FiDollarSign, FiBook, FiFileText, FiSliders, FiBell, FiHelpCircle, FiSettings } from 'react-icons/fi';
 import './Sidebar.css';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const menuItems = [
     { path: '/dashboard', icon: <FiHome />, label: 'Dashboard' },
     { path: '/cuentas', icon: <FiUsers />, label: 'Cuenta' },
@@ -14,6 +17,15 @@ const Sidebar = () => {
     { path: '/notificaciones', icon: <FiBell />, label: 'Notificaciones' },
     { path: '/soporte', icon: <FiHelpCircle />, label: 'Soporte' },
   ];
+
+  const handleNavigation = (e, path) => {
+    e.preventDefault();
+    navigate(path);
+  };
+
+  const isActivePath = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <aside className="sidebar">
@@ -28,9 +40,8 @@ const Sidebar = () => {
           <NavLink
             key={item.path}
             to={item.path}
-            className={({ isActive }) =>
-              `sidebar-nav-item ${isActive ? 'active' : ''}`
-            }
+            onClick={(e) => handleNavigation(e, item.path)}
+            className={`sidebar-nav-item ${isActivePath(item.path) ? 'active' : ''}`}
           >
             <span className="nav-icon">{item.icon}</span>
             <span className="nav-label">{item.label}</span>
@@ -40,9 +51,8 @@ const Sidebar = () => {
       <div className="sidebar-footer">
         <NavLink
           to="/configuracion"
-          className={({ isActive }) =>
-            `sidebar-nav-item ${isActive ? 'active' : ''}`
-          }
+          onClick={(e) => handleNavigation(e, '/configuracion')}
+          className={`sidebar-nav-item ${isActivePath('/configuracion') ? 'active' : ''}`}
         >
           <span className="nav-icon"><FiSettings /></span>
           <span className="nav-label">Configuración</span>
