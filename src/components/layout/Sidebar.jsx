@@ -5,14 +5,14 @@ import './Sidebar.css';
 
 const Sidebar = () => {
   const menuItems = [
-    { path: 'dashboard', icon: <FiHome />, label: 'Dashboard' },
-    { path: 'cuentas', icon: <FiUsers />, label: 'Cuenta' },
-    { path: 'creditos', icon: <FiDollarSign />, label: 'Créditos' },
-    { path: 'contabilidad', icon: <FiBook />, label: 'Contabilidad' },
-    { path: 'reportes', icon: <FiFileText />, label: 'Reportes' },
-    { path: 'parametrizacion', icon: <FiSliders />, label: 'Parametrización Financiera' },
-    { path: 'notificaciones', icon: <FiBell />, label: 'Notificaciones' },
-    { path: 'soporte', icon: <FiHelpCircle />, label: 'Soporte' },
+    { path: '/dashboard', icon: <FiHome />, label: 'Dashboard' },
+    { path: '/cuentas', icon: <FiUsers />, label: 'Cuenta' },
+    { path: '/creditos', icon: <FiDollarSign />, label: 'Créditos' },
+    { path: '/contabilidad', icon: <FiBook />, label: 'Contabilidad' },
+    { path: '/reportes', icon: <FiFileText />, label: 'Reportes' },
+    { path: '/parametrizacion', icon: <FiSliders />, label: 'Parametrización Financiera' },
+    { path: '/notificaciones', icon: <FiBell />, label: 'Notificaciones' },
+    { path: '/soporte', icon: <FiHelpCircle />, label: 'Soporte' },
   ];
 
   return (
@@ -39,7 +39,7 @@ const Sidebar = () => {
       </nav>
       <div className="sidebar-footer">
         <NavLink
-          to="configuracion"
+          to="/configuracion"
           className={({ isActive }) =>
             `sidebar-nav-item ${isActive ? 'active' : ''}`
           }
