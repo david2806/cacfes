@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiPlus, FiHelpCircle, FiMail, FiPhone, FiMessageSquare, FiCheckCircle, FiClock, FiTrendingUp } from 'react-icons/fi';
+import { FiPlus, FiHelpCircle, FiMail, FiPhone, FiMessageSquare, FiCheckCircle, FiClock, FiTrendingUp, FiBook, FiFileText, FiUser, FiMapPin, FiUsers } from 'react-icons/fi';
 import StatCard from '../components/dashboard/StatCard';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
@@ -115,7 +115,92 @@ const Soporte = () => {
     { id: 'nuevo-ticket', label: 'Nuevo Ticket', icon: <FiPlus />, variant: 'primary' },
     { id: 'faq', label: 'FAQ', icon: <FiHelpCircle />, variant: 'outline' },
     { id: 'contactar', label: 'Contactar Soporte', icon: <FiMail />, variant: 'outline' },
-    { id: 'base-conocimiento', label: 'Base de Conocimiento', icon: <FiMessageSquare />, variant: 'outline' }
+    { id: 'base-conocimiento', label: 'Base de Conocimiento', icon: <FiMessageSquare />, variant: 'outline' },
+    { id: 'manual', label: 'Ver Manual', icon: <FiBook />, variant: 'outline' },
+    { id: 'asesores', label: 'Info Asesores', icon: <FiUsers />, variant: 'outline' },
+  ];
+
+  const modulosManual = [
+    {
+      id: 'cuentas',
+      titulo: 'Módulo de Cuentas',
+      descripcion: 'Gestión de cuentas de ahorro y socios de la cooperativa.',
+      pasos: [
+        'Ir a "Cuentas" en el menú lateral.',
+        'Hacer clic en "Nueva Cuenta" para registrar un socio.',
+        'Completar datos personales y tipo de cuenta.',
+        'Guardar para activar la cuenta.',
+      ],
+      icono: <FiFileText />,
+    },
+    {
+      id: 'creditos',
+      titulo: 'Módulo de Créditos',
+      descripcion: 'Solicitud, aprobación y seguimiento de créditos.',
+      pasos: [
+        'Acceder al módulo "Créditos".',
+        'Seleccionar "Nuevo Crédito" e ingresar el monto y plazo.',
+        'El sistema calcula la tabla de amortización automáticamente.',
+        'Aprobar o rechazar la solicitud desde el panel de revisión.',
+      ],
+      icono: <FiFileText />,
+    },
+    {
+      id: 'contabilidad',
+      titulo: 'Módulo de Contabilidad',
+      descripcion: 'Registro de asientos contables, balance y estado de resultados.',
+      pasos: [
+        'Ir a "Contabilidad" en el menú principal.',
+        'Los asientos se generan automáticamente con cada transacción.',
+        'Consultar el balance general en la sección de reportes contables.',
+        'Cerrar el período contable al final de cada mes.',
+      ],
+      icono: <FiBook />,
+    },
+    {
+      id: 'reportes',
+      titulo: 'Módulo de Reportes',
+      descripcion: 'Generación y exportación de reportes del sistema.',
+      pasos: [
+        'Acceder al módulo "Reportes".',
+        'Seleccionar la pestaña del tipo de reporte deseado.',
+        'Hacer clic en "Generar" en el reporte específico.',
+        'Usar la pestaña "Exportar" para descargar en PDF o Excel.',
+      ],
+      icono: <FiFileText />,
+    },
+    {
+      id: 'parametrizacion',
+      titulo: 'Módulo de Parametrización',
+      descripcion: 'Configuración de tasas, plazos y parámetros del sistema.',
+      pasos: [
+        'Acceder a "Parametrización" desde el menú de configuración.',
+        'Definir tasas de interés por tipo de crédito.',
+        'Configurar plazos máximos y montos permitidos.',
+        'Guardar cambios; aplican a nuevos créditos de inmediato.',
+      ],
+      icono: <FiBook />,
+    },
+    {
+      id: 'notificaciones',
+      titulo: 'Módulo de Notificaciones',
+      descripcion: 'Alertas automáticas de vencimientos, mora y eventos del sistema.',
+      pasos: [
+        'Las notificaciones se generan automáticamente por el sistema.',
+        'Revisar el panel de notificaciones en la barra superior.',
+        'Configurar qué alertas recibir en "Configuración > Notificaciones".',
+        'Las alertas de mora se envían por email a los socios afectados.',
+      ],
+      icono: <FiFileText />,
+    },
+  ];
+
+  const asesores = [
+    { id: 1, nombre: 'Carlos Mendoza', cargo: 'Asesor de Crédito Senior', zona: 'Agencia Central', telefono: '+593 99 123 4567', email: 'c.mendoza@cacfes.com', creditos: 87 },
+    { id: 2, nombre: 'Ana Rodríguez', cargo: 'Asesor de Crédito', zona: 'Agencia Norte', telefono: '+593 99 234 5678', email: 'a.rodriguez@cacfes.com', creditos: 64 },
+    { id: 3, nombre: 'Luis Torres', cargo: 'Asesor de Microcréditos', zona: 'Agencia Sur', telefono: '+593 99 345 6789', email: 'l.torres@cacfes.com', creditos: 72 },
+    { id: 4, nombre: 'María Jiménez', cargo: 'Asesor de Crédito', zona: 'Agencia Este', telefono: '+593 99 456 7890', email: 'm.jimenez@cacfes.com', creditos: 55 },
+    { id: 5, nombre: 'Pedro Castillo', cargo: 'Asesor de Crédito Hipotecario', zona: 'Agencia Oeste', telefono: '+593 99 567 8901', email: 'p.castillo@cacfes.com', creditos: 38 },
   ];
 
   return (
@@ -164,6 +249,18 @@ const Soporte = () => {
               onClick={() => setActiveSection('contacto')}
             >
               Contacto
+            </button>
+            <button
+              className={`tab ${activeSection === 'manual' ? 'active' : ''}`}
+              onClick={() => setActiveSection('manual')}
+            >
+              Manual del Sistema
+            </button>
+            <button
+              className={`tab ${activeSection === 'asesores' ? 'active' : ''}`}
+              onClick={() => setActiveSection('asesores')}
+            >
+              Info Asesores
             </button>
           </div>
 
@@ -241,6 +338,58 @@ const Soporte = () => {
                   <p><strong>Domingos y Feriados:</strong> Cerrado</p>
                 </div>
               </Card>
+            </div>
+          )}
+          {activeSection === 'manual' && (
+            <div className="manual-section">
+              {modulosManual.map((modulo) => (
+                <Card key={modulo.id} className="manual-card">
+                  <div className="manual-card-header">
+                    <div className="manual-icon">{modulo.icono}</div>
+                    <div>
+                      <h4>{modulo.titulo}</h4>
+                      <p className="text-muted">{modulo.descripcion}</p>
+                    </div>
+                  </div>
+                  <ol className="manual-pasos">
+                    {modulo.pasos.map((paso, i) => (
+                      <li key={i}>{paso}</li>
+                    ))}
+                  </ol>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {activeSection === 'asesores' && (
+            <div className="asesores-grid">
+              {asesores.map((asesor) => (
+                <Card key={asesor.id} className="asesor-card">
+                  <div className="asesor-avatar">
+                    {asesor.nombre.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </div>
+                  <h4 className="asesor-nombre">{asesor.nombre}</h4>
+                  <p className="asesor-cargo">{asesor.cargo}</p>
+                  <div className="asesor-info">
+                    <div className="asesor-info-item">
+                      <FiMapPin />
+                      <span>{asesor.zona}</span>
+                    </div>
+                    <div className="asesor-info-item">
+                      <FiPhone />
+                      <span>{asesor.telefono}</span>
+                    </div>
+                    <div className="asesor-info-item">
+                      <FiMail />
+                      <span>{asesor.email}</span>
+                    </div>
+                    <div className="asesor-info-item">
+                      <FiUser />
+                      <span>{asesor.creditos} créditos gestionados</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           )}
         </div>
