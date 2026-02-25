@@ -5,7 +5,7 @@ import './Sidebar.css';
 
 const Sidebar = () => {
   const menuItems = [
-    { path: '/dashboard', icon: <FiHome />, label: 'Dashboard' },
+    { path: '/dashboard', icon: <FiHome />, label: 'Inicio' },
     { path: '/cuentas', icon: <FiUsers />, label: 'Cuenta' },
     { path: '/creditos', icon: <FiDollarSign />, label: 'Créditos' },
     { path: '/contabilidad', icon: <FiBook />, label: 'Contabilidad' },
