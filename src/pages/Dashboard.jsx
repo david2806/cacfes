@@ -57,7 +57,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h2>Dashboard</h2>
+        <h2>Inicio</h2>
         <p className="text-muted">Resumen general de la cooperativa</p>
       </div>
 
