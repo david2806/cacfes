@@ -225,3 +225,132 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Manual del Sistema */
+.manual-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.manual-card {
+  padding: var(--spacing-lg);
+}
+
+.manual-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.manual-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: rgba(46, 125, 50, 0.1);
+  color: var(--color-primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  flex-shrink: 0;
+}
+
+.manual-card-header h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-dark);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.manual-card-header p {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+  margin: 0;
+}
+
+.manual-pasos {
+  margin: 0;
+  padding-left: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.manual-pasos li {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-medium);
+  line-height: 1.6;
+}
+
+/* Info Asesores */
+.asesores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.asesor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.asesor-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary-green), var(--color-primary-green-light));
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+}
+
+.asesor-nombre {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-dark);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.asesor-cargo {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-green);
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.asesor-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  text-align: left;
+}
+
+.asesor-info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-medium);
+}
+
+.asesor-info-item svg {
+  color: var(--color-primary-green);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .asesores-grid {
+    grid-template-columns: 1fr;
+  }
+}
